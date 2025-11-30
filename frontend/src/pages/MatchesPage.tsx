@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { Heart, X, MapPin, Briefcase, Sparkles, Calendar } from 'lucide-react';
 import api from '../services/api';
 import type { MatchDisplay } from '../types';
-import clsx from 'clsx';
 
 export default function MatchesPage() {
   const [matches, setMatches] = useState<MatchDisplay[]>([]);

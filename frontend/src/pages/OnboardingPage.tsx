@@ -25,7 +25,6 @@ export default function OnboardingPage() {
   const navigate = useNavigate();
   const { user, fetchCurrentUser } = useAuthStore();
   const [currentStep, setCurrentStep] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (user?.profile_completed) {
@@ -64,7 +63,7 @@ export default function OnboardingPage() {
         {/* Progress Bar */}
         <div className="mb-8">
           <div className="flex items-center justify-between mb-2">
-            {steps.map((step, index) => (
+            {steps.map((_step, index) => (
               <div key={index} className="flex items-center flex-1">
                 <div
                   className={clsx(
@@ -122,7 +121,6 @@ export default function OnboardingPage() {
 
 // Step 1: Profile Info
 function ProfileInfoStep({ onNext }: { onNext: () => void }) {
-  const { user } = useAuthStore();
   const [formData, setFormData] = useState({
     occupation: '',
     interests: '',
@@ -373,7 +371,7 @@ function ActivitySelectionStep({ onNext }: { onNext: () => void }) {
 }
 
 // Step 3: Activity Details
-function ActivityDetailsStep({ onComplete, isLastStep }: { onComplete: () => void; isLastStep: boolean }) {
+function ActivityDetailsStep({ onComplete }: { onComplete: () => void; isLastStep?: boolean }) {
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [currentActivityIndex, setCurrentActivityIndex] = useState(0);

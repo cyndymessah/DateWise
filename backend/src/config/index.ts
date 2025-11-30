@@ -8,7 +8,9 @@ export const config = {
   jwtSecret: process.env.JWT_SECRET || 'change-this-secret',
   jwtExpiresIn: '7d',
   clientUrl: process.env.CLIENT_URL || 'http://localhost:5173',
-  allowedOrigins: process.env.ALLOWED_ORIGINS?.split(',') || ['http://localhost:5173'],
+  allowedOrigins: process.env.ALLOWED_ORIGINS
+    ? process.env.ALLOWED_ORIGINS.split(',').map(origin => origin.trim()).filter(Boolean)
+    : ['http://localhost:5173'],
   anthropicApiKey: process.env.ANTHROPIC_API_KEY || '',
   database: {
     url: process.env.DATABASE_URL || 'postgresql://localhost:5432/datewise',

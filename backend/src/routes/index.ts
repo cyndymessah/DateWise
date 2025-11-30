@@ -5,11 +5,12 @@ import activityRoutes from './activityRoutes';
 import matchRoutes from './matchRoutes';
 import messageRoutes from './messageRoutes';
 import datePlanRoutes from './datePlanRoutes';
+import cronRoutes from './cronRoutes';
 
 const router = Router();
 
 // Health check
-router.get('/health', (req, res) => {
+router.get('/health', (_req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
@@ -20,5 +21,6 @@ router.use('/activities', activityRoutes);
 router.use('/matches', matchRoutes);
 router.use('/messages', messageRoutes);
 router.use('/date-plans', datePlanRoutes);
+router.use('/cron', cronRoutes);
 
 export default router;

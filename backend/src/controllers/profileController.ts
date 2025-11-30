@@ -104,7 +104,7 @@ export const updateProfile = async (req: AuthRequest, res: Response): Promise<vo
     const {
       occupation,
       interests,
-      values,
+      values: userValues,
       lifestyle,
       relationship_goals,
       deal_breakers,
@@ -127,9 +127,9 @@ export const updateProfile = async (req: AuthRequest, res: Response): Promise<vo
       updates.push(`interests = $${paramCount++}`);
       values.push(interests);
     }
-    if (values !== undefined) {
+    if (userValues !== undefined) {
       updates.push(`values = $${paramCount++}`);
-      values.push(values);
+      values.push(userValues);
     }
     if (lifestyle !== undefined) {
       updates.push(`lifestyle = $${paramCount++}`);

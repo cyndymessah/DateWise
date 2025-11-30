@@ -1,10 +1,10 @@
 import { Response } from 'express';
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
+import jwt, { SignOptions } from 'jsonwebtoken';
 import { body } from 'express-validator';
 import pool from '../config/database';
 import { config } from '../config';
-import { AuthRequest, ApiResponse, User } from '../types';
+import { AuthRequest } from '../types';
 
 // Validation rules
 export const registerValidation = [
@@ -63,7 +63,7 @@ export const register = async (req: AuthRequest, res: Response): Promise<void> =
     const token = jwt.sign(
       { id: user.id, email: user.email },
       config.jwtSecret,
-      { expiresIn: config.jwtExpiresIn }
+      { expiresIn: config.jwtExpiresIn } as SignOptions
     );
 
     res.status(201).json({
@@ -138,7 +138,7 @@ export const login = async (req: AuthRequest, res: Response): Promise<void> => {
     const token = jwt.sign(
       { id: user.id, email: user.email },
       config.jwtSecret,
-      { expiresIn: config.jwtExpiresIn }
+      { expiresIn: config.jwtExpiresIn } as SignOptions
     );
 
     res.json({

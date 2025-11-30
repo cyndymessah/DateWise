@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import pool from '../config/database';
-import { Activity, ActivityCategory } from '../types';
+import { Activity } from '../types';
 
 // Get all activities
 export const getAllActivities = async (req: Request, res: Response): Promise<void> => {

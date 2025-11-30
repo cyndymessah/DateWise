@@ -1,6 +1,6 @@
 import { Response } from 'express';
 import pool from '../config/database';
-import { AuthRequest, DatePlanStatus, InterestStatus } from '../types';
+import { AuthRequest, DatePlanStatus } from '../types';
 
 // Get date plan for a match
 export const getDatePlan = async (req: AuthRequest, res: Response): Promise<void> => {

@@ -9,6 +9,10 @@ import routes from './routes';
 
 const app = express();
 
+// Trust proxy - required for Render/Railway/Heroku and other platforms behind reverse proxy
+// This allows express-rate-limit to correctly identify users by IP
+app.set('trust proxy', 1);
+
 // Security middleware
 app.use(helmet());
 
@@ -19,6 +23,9 @@ app.use(
     credentials: true,
   })
 );
+
+// Log CORS configuration on startup
+console.log('🔒 CORS enabled for origins:', config.allowedOrigins);
 
 // Rate limiting
 const limiter = rateLimit({
@@ -41,7 +48,7 @@ if (config.nodeEnv === 'development') {
 }
 
 // Root endpoint
-app.get('/', (req: Request, res: Response) => {
+app.get('/', (_req: Request, res: Response) => {
   res.json({
     name: 'DateWise API',
     version: '1.0.0',
@@ -54,7 +61,7 @@ app.get('/', (req: Request, res: Response) => {
 app.use('/api', routes);
 
 // 404 handler
-app.use((req: Request, res: Response) => {
+app.use((_req: Request, res: Response) => {
   res.status(404).json({
     success: false,
     error: 'Endpoint not found',
@@ -62,7 +69,7 @@ app.use((req: Request, res: Response) => {
 });
 
 // Error handler
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
   console.error('Error:', err);
 
   res.status(500).json({

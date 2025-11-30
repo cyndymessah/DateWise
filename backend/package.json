@@ -7,7 +7,9 @@
     "dev": "tsx watch src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
+    "start:prod": "node src/scripts/migrate-and-seed.js && node dist/index.js",
     "migrate": "node -r dotenv/config src/scripts/migrate.js",
+    "migrate:prod": "node src/scripts/migrate-and-seed.js",
     "seed": "tsx src/scripts/seed.ts",
     "test": "jest"
   },

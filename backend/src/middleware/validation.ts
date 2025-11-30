@@ -19,7 +19,7 @@ export const validate = (req: Request, res: Response, next: NextFunction): void 
 
 // Helper to run validation chains
 export const runValidation = (validations: ValidationChain[]) => {
-  return async (req: Request, res: Response, next: NextFunction) => {
+  return async (req: Request, _res: Response, next: NextFunction) => {
     await Promise.all(validations.map(validation => validation.run(req)));
     next();
   };

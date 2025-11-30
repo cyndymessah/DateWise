@@ -2,7 +2,6 @@ import { Response } from 'express';
 import pool from '../config/database';
 import { AuthRequest, InterestStatus, DatePlanStatus } from '../types';
 import MatchingService from '../services/matchingService';
-import { config } from '../config';
 
 // Get today's matches for current user
 export const getDailyMatches = async (req: AuthRequest, res: Response): Promise<void> => {
